@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root{
+  background-color: #030307;
+}
+
+canvas {
+  width: 100% !important;
+  height: 100vh !important;
+}
+
+@keyframes borderPulse {
+  0% {
+    background-size: 200% 150%;
+    opacity: 0.6;
+  }
+  50% {
+    background-size: 150% 150%;
+    opacity: 1;
+  }
+  100% {
+    background-size: 200% 150%;
+    opacity: 0.6;
+  }
+}
+
+.border-pulse-bottom::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px; 
+  width: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    #030307 30%,
+    #f7f7fe 50%,
+    #030307 70%,
+    transparent 100%
+  );
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 90% 100%;
+  animation: borderPulse 4s ease-in-out infinite;
+}
+
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-1750px); } 
+}
+
+.animate-scroll {
+  animation: scroll 40s linear infinite;
+}
