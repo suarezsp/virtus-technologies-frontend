@@ -1,32 +1,21 @@
 import { useState, useEffect, useRef } from "react";
 import navLogo from "../assets/virtusLogoLight.png";
+import { Link } from "react-router-dom";
 
 const navLinks = [
-  { name: "Home", href: "#" },
+  { name: "Home", href: "/" },
   {
     name: "Services",
     isDropdown: true,
     dropdownItems: [
-        { 
-            name: "AI and Machine Learning", 
-            description: "Supercharge your workflows with cutting-edge AI models and next-gen machine learning techniques that make your work 100x faster and smarter." 
-        },
-        { 
-            name: "Full-stack Development", 
-            description: "From sleek front-end interfaces to robust back-end systems, we craft end-to-end solutions that bring your ideas to life seamlessly." 
-        },
-        { 
-            name: "Professional Counseling", 
-            description: "Expert guidance and support to help you navigate challenges, optimize performance, and achieve your personal or professional goals." 
-        },
-        { 
-            name: "VIRTUS Software", 
-            description: "Tailored software solutions including CRMs, check-in systems, AI assistants, and on-demand applications designed to elevate your business." 
-        },
+      { name: "AI and Machine Learning", href: "/services?type=ai" },
+      { name: "Full-stack Development", href: "/services?type=fullstack" },
+      { name: "Professional Counseling", href: "/services?type=counseling" },
+      { name: "VIRTUS Software", href: "/services?type=software" },
     ],
   },
-  { name: "About us", href: "#" },
-  { name: "Contact", href: "#" },
+  { name: "About us", href: "/about" },
+  { name: "Contact", href: "/contact" },
 ];
 
 function NavbarLayout() {
@@ -50,14 +39,14 @@ function NavbarLayout() {
   }, []);
 
   return (
-    <nav className="fixed bg-virtus-dark border-gray-200 dark:border-gray-600 dark:bg-virtus-dark z-20 w-full">
+    <nav className="fixed bg-virtus-dark border-gray-200 dark:border-gray-600 dark:bg-virtus-dark z-40 w-full">
       <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-4">
-        <a href="#" className="flex items-center space-x-3 rtl:space-x-reverse">
+        <Link to="/" className="flex items-center space-x-3 rtl:space-x-reverse">
           <img src={navLogo} className="h-8" alt="VIRTUS Logo" />
           <span className="self-center text-4xl font-semibold whitespace-nowrap dark:text-virtus-light">
             VIRTUS
           </span>
-        </a>
+        </Link>
         <div className="items-center justify-between font-medium hidden w-full md:flex md:w-auto md:order-1 relative">
           <ul
             className="flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-virtus-dark md:space-x-8 
@@ -106,46 +95,33 @@ function NavbarLayout() {
                               key={item.name}
                               onMouseEnter={() => setHoveredItem(item.name)}
                             >
-                              <span
-                                className={`font-semibold cursor-pointer transition ${
+                              <Link
+                                to={item.href}
+                                className={`font-semibold block transition ${
                                   hoveredItem === item.name
                                     ? "text-virtus-blue"
                                     : "hover:text-virtus-blue"
                                 }`}
+                                onClick={() => setDropdownOpen(false)}
                               >
                                 {item.name}
-                              </span>
+                              </Link>
                             </li>
                           ))}
                         </ul>
-                        <div className="flex items-start p-6">
-                          {hoveredItem ? (
-                            <p className="text-sm text-gray-300">
-                              {
-                                link.dropdownItems.find(
-                                  (i) => i.name === hoveredItem
-                                ).description
-                              }
-                            </p>
-                          ) : (
-                            <p className="text-sm text-gray-500 italic">
-                              
-                            </p>
-                          )}
-                        </div>
                       </div>
                     </div>
                   </div>
                 ) : (
-                  <a
-                    href={link.href}
+                  <Link
+                    to={link.href}
                     className="block py-2 px-3 text-white rounded-sm hover:bg-gray-700 
                     md:hover:bg-transparent md:hover:text-virtus-blue md:p-0 dark:text-white 
                     md:dark:hover:text-virtus-blue dark:hover:bg-gray-700 dark:hover:text-virtus-blue
                     md:dark:hover:bg-transparent dark:border-gray-700"
                   >
                     {link.name}
-                  </a>
+                  </Link>
                 )}
               </li>
             ))}
