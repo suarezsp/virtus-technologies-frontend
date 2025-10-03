@@ -145,14 +145,14 @@ const variants = {
 };
 
 //glass fx
-const GLASS_BG = `linear-gradient(135deg, #030307, #05050aff), radial-gradient(circle at 90% 90%, #b1b1cbff, transparent 45%), radial-gradient(circle at 90% 90%, #9090abff, transparent 20%)`;
+const GLASS_BG = 'radial-gradient(circle,rgba(3, 3, 7, 1) 0%, rgba(3, 3, 7, 1) 100%)'
 
 const glassStyleBase = {
   background: GLASS_BG,
-  backdropFilter: "blur(100px)",
-  WebkitBackdropFilter: "blur(100px)",
-  border: "0px solid rgba(17, 20, 27, 0.04)",
-  boxShadow: "0 100px 30px rgba(216, 217, 221, 0.6)",
+  backdropFilter: "blur(200px)",
+  WebkitBackdropFilter: "blur(200px)",
+  border: "0px solid #030307",
+  boxShadow: "0 100px 30px #030307",
 };
 
 
@@ -217,7 +217,7 @@ export default function AiSection() {
       {/* neural network */}
       <svg width={size.w} height={size.h} className="pointer-events-none fixed inset-0 z-10" style={{ overflow: "visible" }}>
         <defs>
-          <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+          <filter id="glow" x="-50%" y="-50%" width="400%" height="400%">
             <feGaussianBlur stdDeviation="6" result="blur" />
             <feMerge>
               <feMergeNode in="blur" />
@@ -304,7 +304,7 @@ export default function AiSection() {
       </svg>
 
       {/* glass effect global*/}
-      <div aria-hidden className="fixed inset-0 z-20 pointer-events-none" style={{ ...glassStyleBase, opacity: 0.75 }} />
+      <div aria-hidden className="fixed inset-0 z-20 pointer-events-none" style={{ ...glassStyleBase, opacity: 0.90 }} />
 
       {/* services */}
       <main className="relative z-30">
